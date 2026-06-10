@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Bukola Fagbemi | Software Engineer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --bg:       #080c10;
+    --surface:  #0e1420;
+    --card:     #131b2a;
+    --border:   #1e2d45;
+    --accent:   #00d9a6;
+    --accent2:  #3b82f6;
+    --text:     #e8edf5;
+    --muted:    #7a8fa8;
+    --tag-bg:   #0e2030;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 18px 48px;
+    background: rgba(8,12,16,0.85);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800; font-size: 20px;
+    color: var(--accent);
+    letter-spacing: -0.5px;
+  }
+  .nav-links { display: flex; gap: 32px; list-style: none; }
+  .nav-links a {
+    font-size: 14px; font-weight: 500;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.2s;
+    letter-spacing: 0.3px;
+  }
+  .nav-links a:hover { color: var(--accent); }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: flex; align-items: center;
+    padding: 120px 48px 80px;
+    max-width: 1200px; margin: 0 auto;
+    position: relative;
+  }
+  .hero-content { max-width: 700px; }
+  .hero-eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px; color: var(--accent);
+    letter-spacing: 2px; text-transform: uppercase;
+    margin-bottom: 24px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .hero-eyebrow::before {
+    content: '';
+    display: inline-block; width: 32px; height: 1px;
+    background: var(--accent);
+  }
+  .hero h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(48px, 7vw, 88px);
+    font-weight: 800;
+    line-height: 1.0;
+    letter-spacing: -2px;
+    margin-bottom: 24px;
+  }
+  .hero h1 span { color: var(--accent); }
+  .hero-sub {
+    font-size: 18px; color: var(--muted);
+    max-width: 540px; margin-bottom: 40px;
+    line-height: 1.7;
+  }
+  .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; }
+  .btn-primary {
+    padding: 14px 28px;
+    background: var(--accent);
+    color: #080c10;
+    font-weight: 700; font-size: 14px;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: opacity 0.2s, transform 0.2s;
+    letter-spacing: 0.3px;
+  }
+  .btn-primary:hover { opacity: 0.88; transform: translateY(-2px); }
+  .btn-outline {
+    padding: 14px 28px;
+    border: 1px solid var(--border);
+    color: var(--text);
+    font-weight: 500; font-size: 14px;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+  .btn-outline:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+
+  .hero-float {
+    position: absolute; right: 48px; top: 50%;
+    transform: translateY(-50%);
+    display: flex; flex-direction: column; gap: 16px;
+    opacity: 0.15;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px; color: var(--accent);
+    line-height: 1.8;
+    pointer-events: none;
+  }
+
+  /* ── SECTION WRAPPER ── */
+  .section {
+    padding: 100px 48px;
+    max-width: 1200px; margin: 0 auto;
+  }
+  .section-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px; color: var(--accent);
+    text-transform: uppercase; letter-spacing: 2.5px;
+    margin-bottom: 12px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .section-label::after {
+    content: '';
+    flex: 1; height: 1px;
+    background: var(--border);
+    max-width: 80px;
+  }
+  .section-title {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(28px, 4vw, 42px);
+    font-weight: 800;
+    letter-spacing: -1px;
+    margin-bottom: 48px;
+  }
+
+  /* ── ABOUT ── */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+    align-items: start;
+  }
+  .about-text p {
+    color: var(--muted); font-size: 16px;
+    line-height: 1.85; margin-bottom: 20px;
+  }
+  .about-text p strong { color: var(--text); font-weight: 600; }
+  .stat-row {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 24px; margin-top: 40px;
+  }
+  .stat {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 24px;
+  }
+  .stat-number {
+    font-family: 'Syne', sans-serif;
+    font-size: 36px; font-weight: 800;
+    color: var(--accent);
+    line-height: 1;
+  }
+  .stat-label { font-size: 13px; color: var(--muted); margin-top: 6px; }
+
+  /* ── SKILLS ── */
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 16px;
+  }
+  .skill-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 20px 24px;
+    transition: border-color 0.25s, transform 0.25s;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .skill-card:hover {
+    border-color: var(--accent);
+    transform: translateY(-4px);
+  }
+  .skill-icon {
+    width: 36px; height: 36px;
+    background: var(--tag-bg);
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .skill-name { font-size: 14px; font-weight: 600; }
+  .skill-type { font-size: 11px; color: var(--muted); margin-top: 2px; }
+
+  /* ── PROJECTS ── */
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+    gap: 24px;
+  }
+  .project-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 32px;
+    transition: border-color 0.25s, transform 0.25s, box-shadow 0.25s;
+    position: relative;
+    overflow: hidden;
+  }
+  .project-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .project-card:hover {
+    border-color: rgba(0,217,166,0.35);
+    transform: translateY(-6px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+  }
+  .project-card:hover::before { opacity: 1; }
+  .project-card.featured { border-color: rgba(0,217,166,0.4); }
+  .project-card.featured::before { opacity: 1; }
+  .featured-badge {
+    display: inline-block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px; letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--accent);
+    background: rgba(0,217,166,0.1);
+    border: 1px solid rgba(0,217,166,0.3);
+    border-radius: 4px;
+    padding: 4px 10px;
+    margin-bottom: 16px;
+  }
+  .project-number {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; color: var(--muted);
+    margin-bottom: 12px;
+  }
+  .project-card h3 {
+    font-family: 'Syne', sans-serif;
+    font-size: 20px; font-weight: 700;
+    margin-bottom: 12px;
+    letter-spacing: -0.3px;
+  }
+  .project-card p {
+    font-size: 14px; color: var(--muted);
+    line-height: 1.75; margin-bottom: 24px;
+  }
+  .project-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px; }
+  .tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    background: var(--tag-bg);
+    color: var(--accent2);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 4px 10px;
+  }
+  .project-links { display: flex; gap: 16px; }
+  .project-links a {
+    font-size: 13px; font-weight: 600;
+    color: var(--accent);
+    text-decoration: none;
+    display: flex; align-items: center; gap: 6px;
+    transition: opacity 0.2s;
+  }
+  .project-links a:hover { opacity: 0.7; }
+
+  /* ── EXPERIENCE ── */
+  .timeline { position: relative; padding-left: 32px; }
+  .timeline::before {
+    content: '';
+    position: absolute; left: 0; top: 8px; bottom: 8px;
+    width: 1px; background: var(--border);
+  }
+  .timeline-item {
+    position: relative; margin-bottom: 48px;
+  }
+  .timeline-dot {
+    position: absolute; left: -38px; top: 6px;
+    width: 12px; height: 12px;
+    border-radius: 50%;
+    background: var(--accent);
+    border: 2px solid var(--bg);
+    box-shadow: 0 0 0 3px rgba(0,217,166,0.2);
+  }
+  .timeline-meta {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px; color: var(--muted);
+    margin-bottom: 8px;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .timeline-meta .co {
+    color: var(--accent); font-weight: 500;
+  }
+  .timeline-item h3 {
+    font-family: 'Syne', sans-serif;
+    font-size: 20px; font-weight: 700;
+    margin-bottom: 12px;
+    letter-spacing: -0.3px;
+  }
+  .timeline-item ul {
+    list-style: none; padding: 0;
+  }
+  .timeline-item ul li {
+    font-size: 14px; color: var(--muted);
+    line-height: 1.75; margin-bottom: 8px;
+    padding-left: 16px; position: relative;
+  }
+  .timeline-item ul li::before {
+    content: '▸';
+    position: absolute; left: 0;
+    color: var(--accent); font-size: 10px; top: 4px;
+  }
+
+  /* ── EDUCATION ── */
+  .edu-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 28px 32px;
+    display: flex; align-items: center; gap: 24px;
+    margin-bottom: 16px;
+    transition: border-color 0.25s;
+  }
+  .edu-card:hover { border-color: var(--accent); }
+  .edu-icon {
+    width: 52px; height: 52px;
+    background: rgba(0,217,166,0.08);
+    border: 1px solid rgba(0,217,166,0.2);
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 24px; flex-shrink: 0;
+  }
+  .edu-degree {
+    font-family: 'Syne', sans-serif;
+    font-size: 18px; font-weight: 700;
+  }
+  .edu-school { font-size: 14px; color: var(--muted); margin-top: 4px; }
+  .edu-year {
+    margin-left: auto;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px; color: var(--accent);
+    white-space: nowrap;
+  }
+
+  /* ── CONTACT ── */
+  .contact-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px; align-items: center;
+  }
+  .contact-text h2 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(28px, 4vw, 48px);
+    font-weight: 800;
+    letter-spacing: -1px;
+    margin-bottom: 16px;
+    line-height: 1.1;
+  }
+  .contact-text h2 span { color: var(--accent); }
+  .contact-text p { color: var(--muted); font-size: 16px; line-height: 1.7; }
+  .contact-links { display: flex; flex-direction: column; gap: 16px; }
+  .contact-item {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 18px 24px;
+    display: flex; align-items: center; gap: 16px;
+    text-decoration: none; color: var(--text);
+    transition: border-color 0.25s, transform 0.2s;
+  }
+  .contact-item:hover { border-color: var(--accent); transform: translateX(4px); }
+  .contact-item-icon {
+    font-size: 20px; width: 40px; text-align: center;
+  }
+  .contact-item-label { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; }
+  .contact-item-value { font-size: 14px; font-weight: 600; margin-top: 2px; }
+
+  /* ── FOOTER ── */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 32px 48px;
+    display: flex; align-items: center; justify-content: space-between;
+    flex-wrap: wrap; gap: 16px;
+  }
+  footer p { font-size: 13px; color: var(--muted); }
+  footer span { color: var(--accent); }
+  .footer-links { display: flex; gap: 24px; }
+  .footer-links a {
+    font-size: 13px; color: var(--muted);
+    text-decoration: none; transition: color 0.2s;
+  }
+  .footer-links a:hover { color: var(--accent); }
+
+  /* ── DIVIDER ── */
+  .divider {
+    border: none; border-top: 1px solid var(--border);
+    max-width: 1200px; margin: 0 auto;
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    nav { padding: 16px 24px; }
+    .nav-links { display: none; }
+    .hero { padding: 100px 24px 60px; }
+    .hero-float { display: none; }
+    .section { padding: 72px 24px; }
+    .about-grid { grid-template-columns: 1fr; gap: 40px; }
+    .contact-wrapper { grid-template-columns: 1fr; gap: 40px; }
+    .projects-grid { grid-template-columns: 1fr; }
+    footer { padding: 24px; flex-direction: column; text-align: center; }
+    .edu-card { flex-wrap: wrap; }
+    .edu-year { margin-left: 0; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">BF.</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-content">
+    <div class="hero-eyebrow">Available for opportunities</div>
+    <h1>Bukola<br><span>Fagbemi.</span></h1>
+    <p class="hero-sub">
+      Full-Stack Software Engineer specialising in scalable web applications,
+      AI-integrated systems, and elegant mobile experiences. MSc Software Engineering — University of Texas.
+    </p>
+    <div class="hero-actions">
+      <a href="#projects" class="btn-primary">View My Work</a>
+      <a href="#contact" class="btn-outline">Get In Touch</a>
+    </div>
+  </div>
+  <div class="hero-float">
+    <div>const engineer = {</div>
+    <div>&nbsp;&nbsp;name: "Bukola Fagbemi",</div>
+    <div>&nbsp;&nbsp;stack: ["React", "Django"],</div>
+    <div>&nbsp;&nbsp;available: true,</div>
+    <div>};</div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- ABOUT -->
+<section class="section" id="about">
+  <div class="section-label">01 — About</div>
+  <h2 class="section-title">Crafting software that matters.</h2>
+
+  <div class="about-grid">
+    <div class="about-text">
+      <p>
+        I'm <strong>Bukola Fagbemi</strong>, a Full-Stack Software Engineer with a passion for building
+        products that sit at the intersection of <strong>performance, design, and real-world impact</strong>.
+        From pixel-perfect React interfaces to robust Django APIs, I bring ideas to life end-to-end.
+      </p>
+      <p>
+        My experience spans <strong>web platforms, mobile apps, and AI-enhanced systems</strong>.
+        I hold an MSc in Software Engineering from the University of Texas, where I deepened my focus
+        on distributed systems, software architecture, and applied machine learning.
+      </p>
+      <p>
+        I thrive in collaborative environments, mentor junior engineers, and advocate for clean code,
+        accessibility, and developer experience. When I'm not shipping features, I'm contributing to
+        open source or exploring new frameworks.
+      </p>
+    </div>
+
+    <div class="stat-row">
+      <div class="stat">
+        <div class="stat-number">5+</div>
+        <div class="stat-label">Years of experience</div>
+      </div>
+      <div class="stat">
+        <div class="stat-number">20+</div>
+        <div class="stat-label">Projects delivered</div>
+      </div>
+      <div class="stat">
+        <div class="stat-number">8</div>
+        <div class="stat-label">Technologies mastered</div>
+      </div>
+      <div class="stat">
+        <div class="stat-number">MSc</div>
+        <div class="stat-label">Software Engineering</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- SKILLS -->
+<section class="section" id="skills">
+  <div class="section-label">02 — Skills</div>
+  <h2 class="section-title">Tech stack & tools.</h2>
+
+  <div class="skills-grid">
+    <div class="skill-card">
+      <div class="skill-icon">🌐</div>
+      <div>
+        <div class="skill-name">HTML & CSS</div>
+        <div class="skill-type">Frontend Foundation</div>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon">⚡</div>
+      <div>
+        <div class="skill-name">JavaScript</div>
+        <div class="skill-type">Core Language</div>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon">⚛️</div>
+      <div>
+        <div class="skill-name">React</div>
+        <div class="skill-type">Frontend Framework</div>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon">▲</div>
+      <div>
+        <div class="skill-name">Next.js</div>
+        <div class="skill-type">Full-Stack React</div>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon">🐍</div>
+      <div>
+        <div class="skill-name">Python</div>
+        <div class="skill-type">Backend / AI</div>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon">🎸</div>
+      <div>
+        <div class="skill-name">Django</div>
+        <div class="skill-type">Backend Framework</div>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon">🍎</div>
+      <div>
+        <div class="skill-name">Swift</div>
+        <div class="skill-type">iOS Development</div>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon">🗄️</div>
+      <div>
+        <div class="skill-name">PostgreSQL</div>
+        <div class="skill-type">Database</div>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon">🐳</div>
+      <div>
+        <div class="skill-name">Docker</div>
+        <div class="skill-type">DevOps</div>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon">☁️</div>
+      <div>
+        <div class="skill-name">AWS / Vercel</div>
+        <div class="skill-type">Cloud & Deployment</div>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon">🔧</div>
+      <div>
+        <div class="skill-name">REST & GraphQL</div>
+        <div class="skill-type">API Design</div>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon">🤖</div>
+      <div>
+        <div class="skill-name">Machine Learning</div>
+        <div class="skill-type">AI Integration</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- PROJECTS -->
+<section class="section" id="projects">
+  <div class="section-label">03 — Projects</div>
+  <h2 class="section-title">Things I've built.</h2>
+
+  <div class="projects-grid">
+
+    <div class="project-card featured">
+      <div class="featured-badge">★ Featured Project</div>
+      <div class="project-number">001</div>
+      <h3>MedTrack — Healthcare Management Platform</h3>
+      <p>
+        A full-stack patient management system built with Next.js and Django REST Framework.
+        Features real-time appointment scheduling, secure EHR records, and AI-powered
+        health trend analysis for clinical teams.
+      </p>
+      <div class="project-tags">
+        <span class="tag">Next.js</span>
+        <span class="tag">Django</span>
+        <span class="tag">PostgreSQL</span>
+        <span class="tag">Python</span>
+        <span class="tag">REST API</span>
+      </div>
+      <div class="project-links">
+        <a href="https://github.com/bukolafagbemi" target="_blank">↗ GitHub</a>
+        <a href="#" target="_blank">↗ Live Demo</a>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-number">002</div>
+      <h3>ShopSwift — E-Commerce React App</h3>
+      <p>
+        A high-performance e-commerce storefront built with React and a Django backend.
+        Includes cart management, Stripe payment integration, inventory tracking, and
+        an admin dashboard with real-time analytics.
+      </p>
+      <div class="project-tags">
+        <span class="tag">React</span>
+        <span class="tag">Django</span>
+        <span class="tag">Stripe API</span>
+        <span class="tag">Redux</span>
+      </div>
+      <div class="project-links">
+        <a href="https://github.com/bukolafagbemi" target="_blank">↗ GitHub</a>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-number">003</div>
+      <h3>FitPulse — iOS Fitness Tracker</h3>
+      <p>
+        A native iOS app built in Swift that tracks workouts, monitors heart rate data
+        via HealthKit, and delivers AI-generated training recommendations personalised
+        to each user's fitness profile.
+      </p>
+      <div class="project-tags">
+        <span class="tag">Swift</span>
+        <span class="tag">HealthKit</span>
+        <span class="tag">CoreData</span>
+        <span class="tag">Machine Learning</span>
+      </div>
+      <div class="project-links">
+        <a href="https://github.com/bukolafagbemi" target="_blank">↗ GitHub</a>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-number">004</div>
+      <h3>DevBoard — Developer Task Manager</h3>
+      <p>
+        A kanban-style project management tool for engineering teams, built with Next.js
+        and real-time WebSocket updates. Supports GitHub integration, sprint planning,
+        and automated PR status tracking.
+      </p>
+      <div class="project-tags">
+        <span class="tag">Next.js</span>
+        <span class="tag">WebSockets</span>
+        <span class="tag">GitHub API</span>
+        <span class="tag">Tailwind</span>
+      </div>
+      <div class="project-links">
+        <a href="https://github.com/bukolafagbemi" target="_blank">↗ GitHub</a>
+        <a href="#" target="_blank">↗ Live Demo</a>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-number">005</div>
+      <h3>IntelliChat — AI Chatbot Platform</h3>
+      <p>
+        A multi-tenant AI chatbot platform built on Python and Django, allowing businesses
+        to deploy custom LLM-powered assistants. Features prompt engineering tools,
+        conversation memory, and usage analytics.
+      </p>
+      <div class="project-tags">
+        <span class="tag">Python</span>
+        <span class="tag">Django</span>
+        <span class="tag">OpenAI API</span>
+        <span class="tag">React</span>
+      </div>
+      <div class="project-links">
+        <a href="https://github.com/bukolafagbemi" target="_blank">↗ GitHub</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- EXPERIENCE -->
+<section class="section" id="experience">
+  <div class="section-label">04 — Experience</div>
+  <h2 class="section-title">Where I've worked.</h2>
+
+  <div class="timeline">
+
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-meta">
+        <span class="co">Senior Software Engineer</span>
+        <span>·</span>
+        <span>2023 – Present</span>
+      </div>
+      <h3>TechNova Solutions</h3>
+      <ul>
+        <li>Led development of a Next.js SaaS platform serving 50,000+ monthly active users, reducing load times by 40% through server-side rendering optimisations.</li>
+        <li>Architected RESTful Django APIs consumed by web and iOS clients, implementing JWT authentication and role-based access control.</li>
+        <li>Mentored a team of 4 junior engineers through code reviews, pair programming sessions, and technical design workshops.</li>
+        <li>Introduced automated testing pipelines (pytest, Cypress) that reduced production bug rates by 60%.</li>
+      </ul>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-meta">
+        <span class="co">Full-Stack Developer</span>
+        <span>·</span>
+        <span>2021 – 2023</span>
+      </div>
+      <h3>BrightPath Digital Agency</h3>
+      <ul>
+        <li>Built and shipped 12+ client-facing web applications using React and Django across healthcare, fintech, and e-commerce sectors.</li>
+        <li>Integrated third-party APIs including Stripe, Twilio, and Mapbox to extend product capabilities.</li>
+        <li>Collaborated with UI/UX designers to implement pixel-perfect, accessible, and responsive interfaces.</li>
+        <li>Optimised PostgreSQL query performance, achieving a 3× improvement in report generation speed.</li>
+      </ul>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-meta">
+        <span class="co">Software Engineering Intern</span>
+        <span>·</span>
+        <span>2020 – 2021</span>
+      </div>
+      <h3>Launchpad Labs</h3>
+      <ul>
+        <li>Contributed to a React-based dashboard tool used internally by 200+ employees to track engineering KPIs.</li>
+        <li>Developed Python automation scripts that reduced manual data processing tasks by 80%.</li>
+        <li>Participated in Agile sprint cycles and delivered features on schedule across two product releases.</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- EDUCATION -->
+<section class="section" id="education">
+  <div class="section-label">05 — Education</div>
+  <h2 class="section-title">Academic background.</h2>
+
+  <div class="edu-card">
+    <div class="edu-icon">🎓</div>
+    <div>
+      <div class="edu-degree">MSc Software Engineering</div>
+      <div class="edu-school">University of Texas · Austin, TX</div>
+    </div>
+    <div class="edu-year">2019 – 2021</div>
+  </div>
+
+  <div class="edu-card">
+    <div class="edu-icon">📘</div>
+    <div>
+      <div class="edu-degree">BSc Computer Science</div>
+      <div class="edu-school">University of Lagos · Lagos, Nigeria</div>
+    </div>
+    <div class="edu-year">2015 – 2019</div>
+  </div>
+
+</section>
+
+<hr class="divider">
+
+<!-- CONTACT -->
+<section class="section" id="contact">
+  <div class="contact-wrapper">
+    <div class="contact-text">
+      <div class="section-label">06 — Contact</div>
+      <h2>Let's build something<br><span>great together.</span></h2>
+      <p style="margin-top:16px;">
+        Open to full-time roles, freelance collaborations, and interesting open-source projects.
+        Drop me a message — I reply within 24 hours.
+      </p>
+    </div>
+    <div class="contact-links">
+      <a class="contact-item" href="mailto:bukolafagbemi136@gmail.com">
+        <div class="contact-item-icon">✉️</div>
+        <div>
+          <div class="contact-item-label">Email</div>
+          <div class="contact-item-value">bukolafagbemi136@gmail.com</div>
+        </div>
+      </a>
+      <a class="contact-item" href="https://github.com/bukolafagbemi" target="_blank">
+        <div class="contact-item-icon">🐙</div>
+        <div>
+          <div class="contact-item-label">GitHub</div>
+          <div class="contact-item-value">github.com/bukolafagbemi</div>
+        </div>
+      </a>
+      <a class="contact-item" href="https://linkedin.com/in/bukolafagbemi" target="_blank">
+        <div class="contact-item-icon">💼</div>
+        <div>
+          <div class="contact-item-label">LinkedIn</div>
+          <div class="contact-item-value">linkedin.com/in/bukolafagbemi</div>
+        </div>
+      </a>
+      <a class="contact-item" href="https://twitter.com/bukolafagbemi" target="_blank">
+        <div class="contact-item-icon">𝕏</div>
+        <div>
+          <div class="contact-item-label">Twitter / X</div>
+          <div class="contact-item-value">@bukolafagbemi</div>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2026 <span>Bukola Fagbemi</span> · Designed & built with care.</p>
+  <div class="footer-links">
+    <a href="#about">About</a>
+    <a href="#projects">Projects</a>
+    <a href="#contact">Contact</a>
+    <a href="https://github.com/bukolafagbemi" target="_blank">GitHub</a>
+  </div>
+</footer>
+
+</body>
+</html>
